@@ -1,11 +1,15 @@
 {
   "name": "vle-user-feed-exercise",
   "version": "1.0.0",
-  "description": "A training project based on the VLE user integration",
-  "main": "index.js",
+  "description": "A training project based on the VLE user integrationnod",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maida Mujagic",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
 }

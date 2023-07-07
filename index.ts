@@ -7,7 +7,7 @@ type User = {
 }
 
 
-let student: User = {
+const student: User = {
     id: 1,
     userName: "JS123",
     firstName: "John",
@@ -15,7 +15,7 @@ let student: User = {
     studentId: "JS12345"
 }
 
-let studentDetails: Array<string | number>= [];
+const studentDetails: Array<string | number>= [];
 
 for (let key in student) {
     if(student.hasOwnProperty(key)) {

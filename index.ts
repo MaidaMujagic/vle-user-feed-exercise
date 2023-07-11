@@ -1,4 +1,6 @@
-import {printStudentDetails, User} from "./fileFunctions";
+import {userDetails} from "./fileFunction";
+import {User} from "./typeDeclaration";
+
 
 const student: User = {
     id: 1,
@@ -8,5 +10,6 @@ const student: User = {
     studentId: "JS12345"
 }
 
-printStudentDetails(student)
+
+console.log(userDetails(student))
 

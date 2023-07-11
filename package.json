@@ -4,7 +4,7 @@
   "description": "A training project based on the VLE user integration",
   "main": "index.ts",
   "scripts": {
-    "test": "vitest --globals"
+    "test": "vitest run"
   },
   "author": "Maida Mujagic",
   "license": "ISC",

@@ -1,10 +1,5 @@
-type User = {
-    id: number;
-    userName: string;
-    firstName: string;
-    lastName: string;
-    studentId: string;
-}
+import {userDetails} from "./fileFunction";
+import {User} from "./typeDeclaration";
 
 
 const student: User = {
@@ -15,13 +10,6 @@ const student: User = {
     studentId: "JS12345"
 }
 
-const studentDetails: Array<string | number>= [];
 
-for (let key in student) {
-    if(student.hasOwnProperty(key)) {
-        studentDetails.push(student[key as keyof User])
-    }
-}
+console.log(userDetails(student))
 
-
-console.log(studentDetails.join("|"));

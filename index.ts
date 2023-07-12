@@ -1,6 +1,5 @@
-import {userDetails} from "./fileFunction";
+import {getUserDetails} from "./fileFunction";
 import {User} from "./typeDeclaration";
-
 
 const student: User = {
     id: 1,
@@ -11,5 +10,5 @@ const student: User = {
 }
 
 
-console.log(userDetails(student))
+console.log(getUserDetails(student))
 

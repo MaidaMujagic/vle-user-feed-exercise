@@ -4,10 +4,10 @@ import {User} from "./typeDeclaration";
 export const userDetails = (user: User): string => {
 
     const studentDetails: Array<string | number>= [];
-    for (let key in user) {
-        if(user.hasOwnProperty(key)) {
-            studentDetails.push(user[key as keyof User])
-        }
+    const keys: Array<keyof User> = ["id", "userName", "firstName", "lastName", "studentId"]
+
+    for (let key of keys) {
+            studentDetails.push(user[key])
     }
     return studentDetails.join("|");
 }

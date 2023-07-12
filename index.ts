@@ -1,7 +1,6 @@
 import {userDetails} from "./fileFunction";
 import {User} from "./typeDeclaration";
 
-
 const student: User = {
     id: 1,
     userName: "JS123",

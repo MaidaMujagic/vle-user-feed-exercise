@@ -1,4 +1,4 @@
-import {getUserDetails} from "./fileFunction";
+import {userDetails} from "./fileFunction";
 import {User} from "./typeDeclaration";
 
 const student: User = {
@@ -10,5 +10,5 @@ const student: User = {
 }
 
 
-console.log(getUserDetails(student))
+console.log(userDetails(student))
 

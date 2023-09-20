@@ -1,4 +1,4 @@
-import {vi, expect, it} from "vitest";
+import {vi, expect, it, describe, Mock} from "vitest";
 import {User} from "./types";
 import {printUserDetails} from "./index";
 import {userDetails} from "./functions";
@@ -6,36 +6,42 @@ import {userDetails} from "./functions";
 
 vi.mock('./functions')
 
-it ('printUserDetails() should call userDetails() once', () => {
+describe('printUserDetails()', () => {
+    it ('should call userDetails() with the expected argument', () => {
 
-    const testUser: User = {
-        id: 1,
-        userName: "DS123",
-        firstName: "Dummy",
-        lastName: "User",
-        studentId: "DS12345"
-    }
+        const testUser: User = {
+            id: 1,
+            userName: "DS123",
+            firstName: "Dummy",
+            lastName: "User",
+            studentId: "DS12345"
+        }
 
-    printUserDetails(testUser);
+        printUserDetails(testUser);
 
-    expect(userDetails).toHaveBeenCalledTimes(1);
+        expect(userDetails).toHaveBeenCalledWith(testUser);
 
-});
+    });
 
-it ('printUserDetails() should print the correct user details to the console', () => {
+    it ('should print the correct user details to the console', () => {
 
-    const testUser: User = {
-        id: 1,
-        userName: "DS123",
-        firstName: "Dummy",
-        lastName: "User",
-        studentId: "DS12345"
-    }
+        const testUser: User = {
+            id: 1,
+            userName: "DS123",
+            firstName: "Dummy",
+            lastName: "User",
+            studentId: "DS12345"
+        }
 
-    console.log = vi.fn();
+        const mockedUserDetails = userDetails as Mock;
 
-    printUserDetails(testUser);
+        console.log = vi.fn();
 
-    expect(userDetails).toHaveBeenCalledWith(testUser);
+        mockedUserDetails.mockReturnValue('1|DS123|Dummy|User|DS12345');
 
+        printUserDetails(testUser);
+
+        expect(console.log).toHaveBeenCalledWith('1|DS123|Dummy|User|DS12345');
+
+    });
 });

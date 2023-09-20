@@ -1,4 +1,4 @@
-import {User} from "./typeDeclaration";
+import {User} from "./types";
 
 
 export const userDetails = (user: User): string => {

@@ -1,6 +1,6 @@
 import {expect, it} from 'vitest';
-import {User} from "./typeDeclaration";
-import {userDetails} from "./fileFunction";
+import {User} from "./types";
+import {userDetails} from "./functions";
 
 it ('should return the details of type user joined with a vertical bar ', () => {
     const testUser: User = {

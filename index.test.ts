@@ -33,11 +33,9 @@ describe('printUserDetails()', () => {
             studentId: "DS12345"
         }
 
-        const mockedUserDetails = userDetails as Mock;
-
         console.log = vi.fn();
 
-        mockedUserDetails.mockReturnValue('1|DS123|Dummy|User|DS12345');
+        vi.mocked(userDetails).mockReturnValue('1|DS123|Dummy|User|DS12345');
 
         printUserDetails(testUser);
 

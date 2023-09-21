@@ -13,5 +13,5 @@ export const printUserDetails = (user: User) => {
     console.log(userDetails(user))
 };
 
-console.log(userDetails(student))
+printUserDetails(student)
 

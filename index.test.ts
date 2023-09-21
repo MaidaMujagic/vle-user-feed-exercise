@@ -42,4 +42,25 @@ describe('printUserDetails()', () => {
         expect(console.log).toHaveBeenCalledWith('1|DS123|Dummy|User|DS12345');
 
     });
+
+    it ('should print the header row before outputting the user details', () => {
+
+        const testUser: User = {
+            id: 1,
+            userName: "DS123",
+            firstName: "Dummy",
+            lastName: "User",
+            studentId: "DS12345"
+        }
+
+        console.log = vi.fn();
+
+        vi.mocked(userDetails).mockReturnValue('1|DS123|Dummy|User|DS12345');
+
+        printUserDetails(testUser);
+
+        expect(console.log).toHaveBeenCalledWith('EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID');
+        expect(console.log).toHaveBeenCalledWith('1|DS123|Dummy|User|DS12345');
+
+    });
 });

@@ -1,5 +1,5 @@
-import {userDetails} from "./fileFunction";
-import {User} from "./typeDeclaration";
+import {userDetails} from "./functions";
+import {User} from "./types";
 
 const student: User = {
     id: 1,
@@ -9,6 +9,9 @@ const student: User = {
     studentId: "JS12345"
 }
 
+export const printUserDetails = (user: User) => {
+    console.log(userDetails(user))
+};
 
-console.log(userDetails(student))
+printUserDetails(student)
 

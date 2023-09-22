@@ -11,7 +11,7 @@ const student: User = {
 
 export const printUserDetails = (user: User) => {
     const output = "EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID"  + "\n" +
-    `${userDetails(user)}`
+    userDetails(user)
     console.log(output)
 };
 

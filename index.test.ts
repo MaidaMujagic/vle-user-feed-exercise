@@ -41,7 +41,8 @@ describe('printUserDetails()', () => {
 
         printUserDetails(testUser);
 
-        expect(console.log).toHaveBeenCalledWith('EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID \n1|DS123|Dummy|User|DS12345');
+        expect(console.log).toHaveBeenCalledWith('EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID' + '\n' +
+        '1|DS123|Dummy|User|DS12345');
 
     });
 });

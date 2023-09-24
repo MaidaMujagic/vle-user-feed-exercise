@@ -19,10 +19,10 @@ describe('printUserDetails()', () => {
             },
             {
                 id: 2,
-                userName: "TT123",
+                userName: "TS123",
                 firstName: "Test",
                 lastName: "User",
-                studentId: "TT12345"
+                studentId: "TS12345"
             },
         ]
 
@@ -46,10 +46,10 @@ describe('printUserDetails()', () => {
             },
             {
                 id: 2,
-                userName: "TT123",
+                userName: "TS123",
                 firstName: "Test",
                 lastName: "User",
-                studentId: "TT12345"
+                studentId: "TS12345"
             },
         ]
 

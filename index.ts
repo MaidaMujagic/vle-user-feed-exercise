@@ -19,7 +19,7 @@ const student: User []=[
 ]
 
 export const printUserDetails = (users: User []) => {
-    let userOutputs  = userDetails(users)
+    const userOutputs  = userDetails(users)
     const consolidatedOutput = "EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID" + '\n' +
     userOutputs?.join('\n')
 

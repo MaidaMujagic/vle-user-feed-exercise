@@ -7,24 +7,26 @@ import {userDetails} from "./functions";
 vi.mock('./functions')
 
 describe('printUserDetails()', () => {
-    it ('should call userDetails() with the expected argument', () => {
 
-        const testUsers: User []= [
-            {
-                id: 1,
-                userName: "DS123",
-                firstName: "Dummy",
-                lastName: "User",
-                studentId: "DS12345"
-            },
-            {
-                id: 2,
-                userName: "TS123",
-                firstName: "Test",
-                lastName: "User",
-                studentId: "TS12345"
-            },
-        ]
+    const testUsers: User [] = [
+        {
+            id: 1,
+            userName: "DS123",
+            firstName: "Dummy",
+            lastName: "User",
+            studentId: "DS12345"
+        },
+        {
+            id: 2,
+            userName: "TS123",
+            firstName: "Test",
+            lastName: "User",
+            studentId: "TS12345"
+        },
+    ]
+
+
+    it ('should call userDetails() with the expected argument', () => {
 
         console.log = vi.fn();
 
@@ -35,23 +37,6 @@ describe('printUserDetails()', () => {
     });
 
     it ('should print the header row before outputting the user details', () => {
-
-        const testUsers: User [] = [
-            {
-                id: 1,
-                userName: "DS123",
-                firstName: "Dummy",
-                lastName: "User",
-                studentId: "DS12345"
-            },
-            {
-                id: 2,
-                userName: "TS123",
-                firstName: "Test",
-                lastName: "User",
-                studentId: "TS12345"
-            },
-        ]
 
         console.log = vi.fn();
 

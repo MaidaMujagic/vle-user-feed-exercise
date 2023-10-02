@@ -1,13 +1,8 @@
 import {User} from "./types";
 
 
-export const userDetails = (user: User): string => {
+export const userDetails = (users: User []): string [] => {
 
-    const studentDetails: Array<string | number>= [];
-    const keys: Array<keyof User> = ["id", "userName", "firstName", "lastName", "studentId"]
+    return users.map(user => `${user.id}|${user.userName}|${user.firstName}|${user.lastName}|${user.studentId}`);
 
-    for (let key of keys) {
-            studentDetails.push(user[key])
-    }
-    return studentDetails.join("|");
-}
+};

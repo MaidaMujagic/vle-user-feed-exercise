@@ -1,34 +1,29 @@
-import {expect, it} from 'vitest';
+import {expect, it, describe} from 'vitest';
 import {User} from "./types";
 import {userDetails} from "./functions";
 
-it ('should return the details of type user joined with a vertical bar ', () => {
-    const testUser: User = {
-        id: 1,
-        userName: "DS123",
-        firstName: "Dummy",
-        lastName: "User",
-        studentId: "DS12345"
-    }
 
-    const output = userDetails(testUser)
+it ('should return the user details in the same sequence as outlined in type User and joined with a vertical bar', () => {
+    const testUsers: User []= [
+        {
+            studentId: "DS12345",
+            id: 1,
+            userName: "DS123",
+            firstName: "Dummy",
+            lastName: "User"
 
-    expect(output).toBe('1|DS123|Dummy|User|DS12345')
-});
+        },
+        {
+            firstName: "Test",
+            lastName: "User",
+            id: 2,
+            userName: "TS123",
+            studentId: "TS12345"
+        },
+    ]
 
+    const output = userDetails(testUsers)
 
-it ('should return the user details in the exact order as listed in type User ', () => {
-    const testUser: User = {
-        studentId: "DS12345",
-        userName: "DS123",
-        id: 1,
-        firstName: "Dummy",
-        lastName: "User"
-    }
-
-    const output = userDetails(testUser)
-
-    expect(output).toBe('1|DS123|Dummy|User|DS12345')
+    expect(output).toStrictEqual(['1|DS123|Dummy|User|DS12345','2|TS123|Test|User|TS12345'])
 
 });
-

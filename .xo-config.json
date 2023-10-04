@@ -1,0 +1,9 @@
+{
+  "extends": ["prettier"],
+  "rules": {
+    "no-useless-concat": "off",
+    "arrow-body-style": "off",
+    "no-unsafe-optional-chaining": "off"
+  }
+}
+

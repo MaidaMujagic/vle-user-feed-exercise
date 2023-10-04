@@ -1,4 +1,4 @@
-name: Run Format
+name: Run Checkformat
 
 on:
   workflow_dispatch:

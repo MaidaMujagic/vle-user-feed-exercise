@@ -1,5 +1,5 @@
-import { userDetails } from "./functions.js";
 import type { User } from "./types.js";
+import { printUserDetails } from "./print-users.js";
 
 const student: User[] = [
   {
@@ -17,15 +17,5 @@ const student: User[] = [
     studentId: "BB12345",
   },
 ];
-
-export const printUserDetails = (users: User[]) => {
-  const userOutputs = userDetails(users);
-  const consolidatedOutput =
-    "EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID" +
-    "\n" +
-    userOutputs?.join("\n");
-
-  console.log(consolidatedOutput);
-};
 
 printUserDetails(student);

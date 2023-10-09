@@ -1,4 +1,4 @@
-import type { User } from "./types";
+import type { User } from "./types.js";
 import { userDetails } from "./functions.js";
 
 export const printUserDetails = (users: User[]) => {

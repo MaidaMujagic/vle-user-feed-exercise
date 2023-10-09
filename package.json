@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A training project based on the VLE user integration",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "test": "vitest run",
     "format": "prettier --write .",
@@ -12,10 +13,14 @@
   "author": "Maida Mujagic",
   "license": "ISC",
   "devDependencies": {
+    "@types/node-fetch": "^2.6.6",
     "prettier": "3.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "vitest": "^0.33.0",
     "xo": "^0.56.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
   }
 }

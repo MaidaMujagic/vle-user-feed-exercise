@@ -1,4 +1,4 @@
-import { vi, expect, it, describe, beforeEach } from "vitest";
+import {vi, expect, it, describe, beforeEach, afterEach} from "vitest";
 import fetch from "node-fetch";
 import type { Response } from "node-fetch";
 import { fetchData } from "./fetch-data.js";
@@ -24,9 +24,15 @@ describe("fetchData()", () => {
     },
   ];
 
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it("should fetch the data from the given url", async () => {
     vi.mocked(fetch).mockResolvedValue({
-      json: () => Promise.resolve(response),
+      async json(): Promise<User[]> {
+        return response;
+      },
       ok: true,
     } as Response);
 
@@ -35,23 +41,17 @@ describe("fetchData()", () => {
     expect(resolved).toEqual(response);
   });
 
-  it("should return an empty array on network failure", async () => {
-    vi.mocked(fetch).mockRejectedValue(new Error("Network response issues"));
+  it("should throw an error message on network failure", async () => {
+    vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
 
-    const reject = await fetchData();
-
-    expect(reject).toEqual([]);
+    await expect(fetchData()).rejects.toThrowError('Network failure')
   });
 
-  it("should log an appropriate message to the console on network failure", async () => {
-    console.error = vi.fn();
+  it("should throw an error if the webpage cannot be loaded", async () => {
+    vi.mocked(fetch).mockResolvedValue({
+      ok: false
+    } as Response)
 
-    vi.mocked(fetch).mockRejectedValue(new Error("Network response issues"));
-
-    await fetchData();
-
-    expect(console.error).toHaveBeenCalledWith(
-      expect.objectContaining({ message: "Network response issues" }),
-    );
-  });
+    await expect(fetchData()).rejects.toThrowError('The page containing information about Users cannot be loaded')
+  })
 });

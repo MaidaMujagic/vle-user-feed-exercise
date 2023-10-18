@@ -1,4 +1,4 @@
-import {vi, expect, it, describe, beforeEach, afterEach} from "vitest";
+import { vi, expect, it, describe, afterEach } from "vitest";
 import fetch from "node-fetch";
 import type { Response } from "node-fetch";
 import { fetchData } from "./fetch-data.js";
@@ -25,8 +25,8 @@ describe("fetchData()", () => {
   ];
 
   afterEach(() => {
-    vi.restoreAllMocks()
-  })
+    vi.restoreAllMocks();
+  });
 
   it("should fetch the data from the given url", async () => {
     vi.mocked(fetch).mockResolvedValue({
@@ -44,14 +44,16 @@ describe("fetchData()", () => {
   it("should throw an error message on network failure", async () => {
     vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
 
-    await expect(fetchData()).rejects.toThrowError('Network failure')
+    await expect(fetchData()).rejects.toThrowError("Network failure");
   });
 
   it("should throw an error if the webpage cannot be loaded", async () => {
     vi.mocked(fetch).mockResolvedValue({
-      ok: false
-    } as Response)
+      ok: false,
+    } as Response);
 
-    await expect(fetchData()).rejects.toThrowError('The page containing information about Users cannot be loaded')
-  })
+    await expect(fetchData()).rejects.toThrowError(
+      "The page containing information about Users cannot be loaded",
+    );
+  });
 });

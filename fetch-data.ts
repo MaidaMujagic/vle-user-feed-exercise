@@ -1,7 +1,8 @@
 import fetch from "node-fetch";
 import type { User } from "./types.js";
+import 'dotenv/config'
 
-const url = "https://webhook.site/12267765-da13-48fc-b243-9836e4877577";
+const url = process.env.REST_API_URL as string;
 
 export const fetchData = async (): Promise<User[]> => {
   const response = await fetch(url);

@@ -1,8 +1,14 @@
 import fetch from "node-fetch";
+import * as dotenv from "dotenv";
 import type { User } from "./types.js";
-import 'dotenv/config'
 
-const url = process.env.REST_API_URL as string;
+dotenv.config({
+  path: "./.env",
+});
+
+const environment = process.env.REST_API_URL;
+
+const url = environment ?? "";
 
 export const fetchData = async (): Promise<User[]> => {
   const response = await fetch(url);

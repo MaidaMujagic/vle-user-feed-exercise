@@ -27,7 +27,7 @@ describe("outputFetchedData", () => {
     },
   ];
 
-  it("should call the printUserDetails() with the result of fetchData", async () => {
+  it("should print the user details to the console", async () => {
     console.log = vi.fn();
 
     vi.mocked(fetchData).mockResolvedValue(testUsers);

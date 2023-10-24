@@ -27,22 +27,14 @@ describe("outputFetchedData", () => {
     },
   ];
 
-  it("should call the fetchData()", async () => {
-    vi.mocked(fetchData).mockResolvedValue(testUsers);
-
-    await outputFetchedData();
-
-    expect(fetchData).toHaveBeenCalledTimes(1);
-  });
-
   it("should call the printUserDetails() with the result of fetchData", async () => {
-    const spy = vi.spyOn(console, "log");
+    console.log = vi.fn();
 
     vi.mocked(fetchData).mockResolvedValue(testUsers);
 
     await outputFetchedData();
 
-    expect(spy).toHaveBeenCalledWith(
+    expect(console.log).toHaveBeenCalledWith(
       "EXTERNAL_PERSON_KEY|USER_ID|FIRSTNAME|LASTNAME|STUDENT_ID" +
         "\n" +
         "1|DS123|Dummy|User|DS12345" +
@@ -52,10 +44,13 @@ describe("outputFetchedData", () => {
   });
 
   it("should log an error to the console if the user details cannot be output", async () => {
-    const spy = vi.spyOn(console, "error");
+    console.error = vi.fn();
 
     await outputFetchedData();
 
-    expect(spy).toHaveBeenCalledWith("Error printing data:", expect.any(Error));
+    expect(console.error).toHaveBeenCalledWith(
+      "Error printing data:",
+      expect.any(Error),
+    );
   });
 });

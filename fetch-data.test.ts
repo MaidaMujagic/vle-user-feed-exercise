@@ -29,7 +29,7 @@ describe("fetchData()", () => {
   });
 
   it("should use an environment variable when fetching data", async () => {
-    const testUrl = process.env.REST_API_URL ?? "";
+    process.env.REST_API_URL = "testUrl";
 
     vi.mocked(fetch).mockResolvedValue({
       async json(): Promise<User[]> {
@@ -40,35 +40,34 @@ describe("fetchData()", () => {
 
     await fetchData();
 
-    expect(fetch).toHaveBeenCalledWith(testUrl);
+    expect(fetch).toHaveBeenCalledWith("testUrl");
+  });
+  it("should fetch the data from the REST API", async () => {
+    vi.mocked(fetch).mockResolvedValue({
+      async json(): Promise<User[]> {
+        return response;
+      },
+      ok: true,
+    } as Response);
 
-    it("should fetch the data from the REST API", async () => {
-      vi.mocked(fetch).mockResolvedValue({
-        async json(): Promise<User[]> {
-          return response;
-        },
-        ok: true,
-      } as Response);
+    const resolved = await fetchData();
 
-      const resolved = await fetchData();
+    expect(resolved).toEqual(response);
+  });
 
-      expect(resolved).toEqual(response);
-    });
+  it("should throw an error message on network failure", async () => {
+    vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
 
-    it("should throw an error message on network failure", async () => {
-      vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
+    await expect(fetchData()).rejects.toThrowError("Network failure");
+  });
 
-      await expect(fetchData()).rejects.toThrowError("Network failure");
-    });
+  it("should throw an error if the webpage cannot be loaded", async () => {
+    vi.mocked(fetch).mockResolvedValue({
+      ok: false,
+    } as Response);
 
-    it("should throw an error if the webpage cannot be loaded", async () => {
-      vi.mocked(fetch).mockResolvedValue({
-        ok: false,
-      } as Response);
-
-      await expect(fetchData()).rejects.toThrowError(
-        "The page containing information about Users cannot be loaded",
-      );
-    });
+    await expect(fetchData()).rejects.toThrowError(
+      "The page containing information about Users cannot be loaded",
+    );
   });
 });

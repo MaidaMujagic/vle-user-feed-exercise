@@ -28,7 +28,9 @@ describe("fetchData()", () => {
     vi.restoreAllMocks();
   });
 
-  it("should fetch the data from the given url", async () => {
+  it("should use an environment variable when fetching data", async () => {
+    const testUrl = process.env.REST_API_URL ?? "";
+
     vi.mocked(fetch).mockResolvedValue({
       async json(): Promise<User[]> {
         return response;
@@ -36,24 +38,37 @@ describe("fetchData()", () => {
       ok: true,
     } as Response);
 
-    const resolved = await fetchData();
+    await fetchData();
 
-    expect(resolved).toEqual(response);
-  });
+    expect(fetch).toHaveBeenCalledWith(testUrl);
 
-  it("should throw an error message on network failure", async () => {
-    vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
+    it("should fetch the data from the REST API", async () => {
+      vi.mocked(fetch).mockResolvedValue({
+        async json(): Promise<User[]> {
+          return response;
+        },
+        ok: true,
+      } as Response);
 
-    await expect(fetchData()).rejects.toThrowError("Network failure");
-  });
+      const resolved = await fetchData();
 
-  it("should throw an error if the webpage cannot be loaded", async () => {
-    vi.mocked(fetch).mockResolvedValue({
-      ok: false,
-    } as Response);
+      expect(resolved).toEqual(response);
+    });
 
-    await expect(fetchData()).rejects.toThrowError(
-      "The page containing information about Users cannot be loaded",
-    );
+    it("should throw an error message on network failure", async () => {
+      vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
+
+      await expect(fetchData()).rejects.toThrowError("Network failure");
+    });
+
+    it("should throw an error if the webpage cannot be loaded", async () => {
+      vi.mocked(fetch).mockResolvedValue({
+        ok: false,
+      } as Response);
+
+      await expect(fetchData()).rejects.toThrowError(
+        "The page containing information about Users cannot be loaded",
+      );
+    });
   });
 });

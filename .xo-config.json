@@ -2,6 +2,7 @@
   "extends": ["prettier"],
   "rules": {
     "no-useless-concat": "off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "n/prefer-global/process": "off"
   }
 }

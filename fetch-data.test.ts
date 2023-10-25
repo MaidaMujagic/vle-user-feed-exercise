@@ -24,31 +24,32 @@ describe("fetchData()", () => {
     },
   ];
 
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  it("should use an environment variable when fetching data", async () => {
-    process.env.REST_API_URL = "testUrl";
-
+  const mockResolved = async () => {
     vi.mocked(fetch).mockResolvedValue({
       async json(): Promise<User[]> {
         return response;
       },
       ok: true,
     } as Response);
+  }
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+
+  it("should use an environment variable when fetching data", async () => {
+    process.env.REST_API_URL = "testUrl";
+
+    await mockResolved();
 
     await fetchData();
 
     expect(fetch).toHaveBeenCalledWith("testUrl");
   });
+
   it("should fetch the data from the REST API", async () => {
-    vi.mocked(fetch).mockResolvedValue({
-      async json(): Promise<User[]> {
-        return response;
-      },
-      ok: true,
-    } as Response);
+    await mockResolved();
 
     const resolved = await fetchData();
 

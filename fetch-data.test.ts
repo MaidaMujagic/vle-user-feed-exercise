@@ -31,12 +31,11 @@ describe("fetchData()", () => {
       },
       ok: true,
     } as Response);
-  }
+  };
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
-
 
   it("should use an environment variable when fetching data", async () => {
     process.env.REST_API_URL = "testUrl";

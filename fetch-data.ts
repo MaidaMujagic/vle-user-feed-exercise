@@ -1,9 +1,8 @@
 import fetch from "node-fetch";
 import type { User } from "./types.js";
 
-const url = "https://webhook.site/12267765-da13-48fc-b243-9836e4877577";
-
 export const fetchData = async (): Promise<User[]> => {
+  const url = process.env.REST_API_URL ?? "";
   const response = await fetch(url);
 
   if (!response.ok) {

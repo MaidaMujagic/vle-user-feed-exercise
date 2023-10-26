@@ -1,4 +1,4 @@
-import { vi, expect, it, describe, afterEach } from "vitest";
+import { vi, expect, it, describe, afterEach, beforeEach } from "vitest";
 import fetch from "node-fetch";
 import type { Response } from "node-fetch";
 import { fetchData } from "./fetch-data.js";
@@ -6,7 +6,7 @@ import type { User } from "./types.js";
 
 vi.mock("node-fetch");
 
-describe("fetchData()", () => {
+describe("fetch", () => {
   const response: User[] = [
     {
       id: 1,
@@ -24,23 +24,35 @@ describe("fetchData()", () => {
     },
   ];
 
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  it("should fetch the data from the given url", async () => {
+  beforeEach(() => {
     vi.mocked(fetch).mockResolvedValue({
       async json(): Promise<User[]> {
         return response;
       },
       ok: true,
     } as Response);
+  });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("should use an environment variable when fetching data", async () => {
+    process.env.REST_API_URL = "testUrl";
+
+    await fetchData();
+
+    expect(fetch).toHaveBeenCalledWith("testUrl");
+  });
+
+  it("should fetch the data from the REST API", async () => {
     const resolved = await fetchData();
 
     expect(resolved).toEqual(response);
   });
+});
 
+describe("fetchData()", () => {
   it("should throw an error message on network failure", async () => {
     vi.mocked(fetch).mockRejectedValueOnce(new Error("Network failure"));
 
